@@ -1,0 +1,20 @@
+version: '2'
+services:
+   mongodb:
+      build:
+        context: .
+        dockerfile: dockerfile.mongo
+      container_name: "mongo-otus"     
+      volumes:
+         - /docker/volumes/mongo:/data/db
+         
+         
+   myapp:
+      build:
+        context: .
+        dockerfile: dockerfile.app
+      container_name: "app-otus"
+      links:
+        - mongodb
+      depends_on:
+        - mongodb
