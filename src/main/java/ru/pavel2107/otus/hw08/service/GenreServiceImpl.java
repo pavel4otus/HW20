@@ -27,7 +27,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    @HystrixCommand( defaultFallback = "defaultSave")
+    @HystrixCommand( fallbackMethod = "defaultSave")
     public Genre save(Genre genre) {
         return repository.save( genre);
     }
@@ -38,7 +38,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    @HystrixCommand( defaultFallback = "defaultDelete")
+    @HystrixCommand( fallbackMethod = "defaultDelete")
     public void delete(String id) throws Exception{
         Genre g = find( id);
         if( g != null) {
@@ -57,7 +57,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    @HystrixCommand( defaultFallback = "defaultFind")
+    @HystrixCommand( fallbackMethod = "defaultFind")
     public Genre find(String id) {
         return repository.findById( id).orElse( null);
     }
@@ -68,7 +68,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    @HystrixCommand( defaultFallback = "defaultFindAll")
+    @HystrixCommand( fallbackMethod = "defaultFindAll")
     public List<Genre> findAll() {
         return (List<Genre>)repository.findAll();
     }
