@@ -32,11 +32,10 @@ public class GenreServiceImpl implements GenreService {
         return repository.save( genre);
     }
 
+    @HystrixCommand
     private Genre defaultSave (Genre genre) {
         return new Genre();
     }
-
-
 
     @Override
     @HystrixCommand( defaultFallback = "defaultDelete")
@@ -52,11 +51,10 @@ public class GenreServiceImpl implements GenreService {
         }
     }
 
+    @HystrixCommand
     private void defaultDelete(String id) throws Exception{
 
     }
-
-
 
     @Override
     @HystrixCommand( defaultFallback = "defaultFind")
@@ -64,11 +62,10 @@ public class GenreServiceImpl implements GenreService {
         return repository.findById( id).orElse( null);
     }
 
+    @HystrixCommand
     public Genre defaultFind(String id) {
         return null;
     }
-
-
 
     @Override
     @HystrixCommand( defaultFallback = "defaultFindAll")
@@ -76,6 +73,7 @@ public class GenreServiceImpl implements GenreService {
         return (List<Genre>)repository.findAll();
     }
 
+    @HystrixCommand
     private List<Genre> defaultFindAll(){
         return new ArrayList<Genre>();
     }
